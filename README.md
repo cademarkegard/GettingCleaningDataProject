@@ -7,8 +7,8 @@ Using the UCI HAR Data extracted into the working directory the ```"run_analysis
 
 Requires packages:
 
-```dplyr```
-```tidyr```
+`dplyr`
+`tidyr`
 
 Open in R:
 ```r
