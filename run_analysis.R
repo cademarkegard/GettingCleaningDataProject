@@ -1,13 +1,13 @@
 library(dplyr)
 library(tidyr)
-
+#Assumes you are in the folder UCI\ HAR\ Dataset/
 #read in the column names from the features file
-colnames<-read.table("UCI\ HAR\ Dataset/features.txt")
+colnames<-read.table("features.txt")
 colnames<-colnames$V2
 
 #now read in the test and training data 
-testdata<-read.table("UCI\ HAR\ Dataset/test/X_test.txt",col.names=colnames)
-traindata<-read.table("UCI\ HAR\ Dataset/train/X_train.txt",col.names=colnames)
+testdata<-read.table("test/X_test.txt",col.names=colnames)
+traindata<-read.table("train/X_train.txt",col.names=colnames)
 combined<-rbind_all(list(traindata,testdata))
 
 #remove the old data sets
@@ -17,16 +17,16 @@ rm(testdata,traindata)
 combined<-combined%>%select(-contains("angle."))%>%select(-contains("meanFreq"))%>%select(contains("mean"),contains("std"))
 
 #read in the subjects
-subjecttest<-read.table("UCI\ HAR\ Dataset/test/subject_test.txt",col.names="Subject")
-subjecttrain<-read.table("UCI\ HAR\ Dataset/train/subject_train.txt",col.names="Subject")
+subjecttest<-read.table("test/subject_test.txt",col.names="Subject")
+subjecttrain<-read.table("train/subject_train.txt",col.names="Subject")
 subjectcombined<-rbind_all(list(subjecttrain,subjecttest))
 
 #remove the old data
 rm(subjecttest,subjecttrain)
 
 #read in the activities
-activitytest<-read.table("UCI\ HAR\ Dataset/test/y_test.txt",col.names="Activity")
-activitytrain<-read.table("UCI\ HAR\ Dataset/train/y_train.txt",col.names="Activity")
+activitytest<-read.table("test/y_test.txt",col.names="Activity")
+activitytrain<-read.table("train/y_train.txt",col.names="Activity")
 activitycombined<-rbind_all(list(activitytrain,activitytest))
 
 #remove the old data
